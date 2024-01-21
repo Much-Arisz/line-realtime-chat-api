@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+    env_file: .env
+    volumes:
+      - ./docker-entrypoint-initdb.d/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - mongo_data:/data/db
+
+
+  app:
+    build: 
+      context: .
+      args:
+        - BUILD_DATE=$(date)
+    volumes:
+      - .:/app
+    env_file: .env
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    expose:
+      - "${SERVER_PORT}"
+    depends_on:
+      - mongodb
+
+  ngrok:
+    image: wernight/ngrok
+    ports:
+      - "4042:4042" 
+    expose:
+      - "4042"
+    command: ngrok http --authtoken=${NGROK_AUTHTOKEN} --hostname=${NGROK_APIDOMAIN} app:${SERVER_PORT}
+    env_file: .env
+    
+volumes:
+  mongo_data:
