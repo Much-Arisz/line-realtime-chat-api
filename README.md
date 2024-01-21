@@ -14,3 +14,8 @@ $ npm install
 ``` bash
 $ docker-compose up -d
 ```
+3. Add Line OA
+- ID: @838qvqkc
+- QRCODE
+  
+![image](https://github.com/Much-Arisz/line-realtime-chat-web/assets/56961503/3407b73b-247b-4472-b0f3-49936801da0b)
