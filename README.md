@@ -5,11 +5,11 @@ Line OA Real-time Chat Back-end (API)
 - Docker (optional)
 - NGROK (if run on local)
 ## Quick Start
-- Install Project
+### Install Project
 ``` bash
 $ npm install
 ```
-- Start Project
+### Start Project
 1. Locally
 - Run project
 ``` bash
