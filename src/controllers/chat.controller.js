@@ -72,7 +72,7 @@ const getUsersList = async (req) => {
 }
 
 const getImageChat = async (req, res) => {
-    const body = req.query;
+    const body = req.body;
     const logSessionText = `chat/getImageChat =>`;
     console.log(logSessionText, "start");
     console.log(logSessionText, "body:", body);
