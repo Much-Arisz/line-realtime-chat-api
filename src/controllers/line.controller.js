@@ -27,13 +27,17 @@ const webhook = async (event) => {
         console.log(logSessionText, "type:", event.type);
         switch (event.type) {
             case "follow": {
-                // Check existing user data
-                const userData = await userTable.findOne({ lineId: userId });
-                if (!userData) {
-                    console.log(logSessionText, "user is not existing");
+                // Check existing richMenuAlias
+                const shortId = userId.substring(0, 28).toLowerCase();
+                const richMenuAliasId = `in-${shortId}`;
+                const response = await lineClient.getRichMenuAlias(richMenuAliasId);
+                if (!response.richMenuId) {
+                    console.log(logSessionText, "richMenuis not existing");
                     // Create richmenu
                     console.log(logSessionText, "create RichMenuForNewUser");
                     lineApi.createRichMenuForNewUser(userId);
+                } else {
+                    await lineClient.linkRichMenuIdToUser(userId, response.richMenuId);
                 }
                 break;
             }
