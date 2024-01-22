@@ -32,7 +32,7 @@ const usersSchema = new mongoDB.Schema({
     },
     image: {
         type: String,
-        required: true,
+        required: false,
     },
 
 
